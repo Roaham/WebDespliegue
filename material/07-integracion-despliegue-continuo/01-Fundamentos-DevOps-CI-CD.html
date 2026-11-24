@@ -1,0 +1,4312 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Temario, apuntes y actividades del módulo — Curso 2025/2026">
+      
+      
+      
+      
+        <link rel="prev" href="../../actividades/UT5-actividades.html">
+      
+      
+        <link rel="next" href="02-Integracion-Continua-CI.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Fundamentos DevOps y CI/CD - Despliegue de Aplicaciones Web · 2.º DAW</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-fundamentos-devops-y-el-ciclo-de-vida" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../index.html" title="Despliegue de Aplicaciones Web · 2.º DAW" class="md-header__button md-logo" aria-label="Despliegue de Aplicaciones Web · 2.º DAW" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Despliegue de Aplicaciones Web · 2.º DAW
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Fundamentos DevOps y CI/CD
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="Cambiar a modo noche"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo noche" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo día"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo día" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../evaluacion.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  El curso
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01-control-versiones-documentacion/01-introduccion.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Temario
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../print_page.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Todo el material (imprimir / exportar a PDF)
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Despliegue de Aplicaciones Web · 2.º DAW" class="md-nav__button md-logo" aria-label="Despliegue de Aplicaciones Web · 2.º DAW" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Despliegue de Aplicaciones Web · 2.º DAW
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    El curso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    El curso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluacion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tecnologias.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tecnologías
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT0 · Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT0 · Control de versiones y documentación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-control-versiones-documentacion/01-introduccion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-control-versiones-documentacion/02-git-basico.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git básico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-control-versiones-documentacion/03-github.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-control-versiones-documentacion/04-herramientas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herramientas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-control-versiones-documentacion/05-documentacion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-control-versiones-documentacion/06-resumen.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT0-Git-y-Documentacion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT0-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT1 · Arquitecturas web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT1 · Arquitecturas web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/01-introduccion-web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/02-componentes-web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Componentes web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/03-arquitecturas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/04-http-https.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP y HTTPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/05-servicios-apis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios y APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/06-web-dinamica.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web dinámica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/07-lenguajes-frameworks.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lenguajes y frameworks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/08-servidores.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servidores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/09-despliegue.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/10-resumen.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT1-Arquitecturas-Web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT1-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT2 · Servidores web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT2 · Servidores web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_1" id="__nav_3_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/01-contenedores-docker.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores y Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/02-github-pages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Pages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/03-netlify.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Netlify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/04-apache-web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/05-nginx-web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nginx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/06-nginx-proxy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nginx: proxy y balanceo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT2-Servidores-Web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT2-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT3 · Servidores de aplicaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT3 · Servidores de aplicaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_1" id="__nav_3_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/07-java.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Despliegue Java (JVM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/08-net.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Despliegue .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/09-resumen.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT3-Servidores-Aplicaciones.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT3-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT4 · Transferencia de archivos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT4 · Transferencia de archivos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_1" id="__nav_3_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-transferencia-archivos/01-ftp.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-transferencia-archivos/02-vsftpd.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSFTPD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-transferencia-archivos/03-ftps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FTPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-transferencia-archivos/04-sftp.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SFTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-transferencia-archivos/05-spring-ftp.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FTP con Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-transferencia-archivos/06-resumen.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT4-Transferencia-Archivos.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT4-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT5 · Verificación y servicios de red
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT5 · Verificación y servicios de red
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_1" id="__nav_3_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/01-Introduccion-QA.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción al QA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/02-Pruebas-Unitarias.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pruebas unitarias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/03-Pruebas-Integracion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pruebas de integración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/04-Automatizacion-APIs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatización de APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/05-Pruebas-E2E.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pruebas E2E
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/06-Servicios-Red-Infraestructura.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios de red e infraestructura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/07-resumen.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT5-Verificacion-y-Servicios-Red.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT5-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT6 · Integración y despliegue continuo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT6 · Integración y despliegue continuo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_7_1" id="__nav_3_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_7_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos DevOps y CI/CD
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="01-Fundamentos-DevOps-CI-CD.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos DevOps y CI/CD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-que-es-devops-mas-alla-de-una-herramienta-una-cultura-de-colaboracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. ¿Qué es DevOps? Más allá de una herramienta, una cultura de colaboración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1. ¿Qué es DevOps? Más allá de una herramienta, una cultura de colaboración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-problema-de-los-silos-tradicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El Problema de los Silos Tradicionales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-solucion-cultura-devops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La Solución: Cultura DevOps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#principios-fundamentales-de-devops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Principios Fundamentales de DevOps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-el-flujo-de-valor-del-teclado-del-desarrollador-al-navegador-del-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. El flujo de valor: Del teclado del desarrollador al navegador del cliente
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2. El flujo de valor: Del teclado del desarrollador al navegador del cliente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metricas-del-flujo-de-valor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métricas del Flujo de Valor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-concepto-de-shift-left" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El Concepto de "Shift Left"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-el-ciclo-de-vida-del-software-moderno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. El Ciclo de Vida del Software Moderno
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3. El Ciclo de Vida del Software Moderno">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-fases-del-ciclo-de-vida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.1. Fases del Ciclo de Vida
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-integracion-con-el-pipeline-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.2. Integración con el Pipeline CI/CD
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-beneficios-de-adoptar-devops-y-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Beneficios de Adoptar DevOps y CI/CD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4. Beneficios de Adoptar DevOps y CI/CD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-beneficios-tecnicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4.1. Beneficios Técnicos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-beneficios-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4.2. Beneficios de Negocio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-resumen-del-tema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5. Resumen del Tema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5. Resumen del Tema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checklist-de-supervivencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist de Supervivencia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-Integracion-Continua-CI.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración continua (CI)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03-Entrega-Despliegue-Continuo-CD.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrega y despliegue continuo (CD)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04-GitHub-Actions-CLI.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Actions y CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05-Control-Calidad-Branch-Protection.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de calidad y branch protection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06-Pipeline-Fullstack-Practica.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline fullstack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07-Despliegue-Automatizado.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Despliegue automatizado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="08-Resumen.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT6-CICD.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT6-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../print_page.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Todo el material (imprimir / exportar a PDF)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-que-es-devops-mas-alla-de-una-herramienta-una-cultura-de-colaboracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. ¿Qué es DevOps? Más allá de una herramienta, una cultura de colaboración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1. ¿Qué es DevOps? Más allá de una herramienta, una cultura de colaboración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-problema-de-los-silos-tradicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El Problema de los Silos Tradicionales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-solucion-cultura-devops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La Solución: Cultura DevOps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#principios-fundamentales-de-devops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Principios Fundamentales de DevOps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-el-flujo-de-valor-del-teclado-del-desarrollador-al-navegador-del-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. El flujo de valor: Del teclado del desarrollador al navegador del cliente
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2. El flujo de valor: Del teclado del desarrollador al navegador del cliente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metricas-del-flujo-de-valor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métricas del Flujo de Valor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-concepto-de-shift-left" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El Concepto de "Shift Left"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-el-ciclo-de-vida-del-software-moderno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. El Ciclo de Vida del Software Moderno
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3. El Ciclo de Vida del Software Moderno">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-fases-del-ciclo-de-vida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.1. Fases del Ciclo de Vida
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-integracion-con-el-pipeline-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.2. Integración con el Pipeline CI/CD
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-beneficios-de-adoptar-devops-y-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Beneficios de Adoptar DevOps y CI/CD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4. Beneficios de Adoptar DevOps y CI/CD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-beneficios-tecnicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4.1. Beneficios Técnicos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-beneficios-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4.2. Beneficios de Negocio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-resumen-del-tema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5. Resumen del Tema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5. Resumen del Tema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checklist-de-supervivencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist de Supervivencia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<ul>
+<li><a href="#1-fundamentos-devops-y-el-ciclo-de-vida">1. Fundamentos: DevOps y el Ciclo de Vida</a></li>
+<li><a href="#11-qué-es-devops-más-allá-de-una-herramienta-una-cultura-de-colaboración">1.1. ¿Qué es DevOps? Más allá de una herramienta, una cultura de colaboración</a><ul>
+<li><a href="#el-problema-de-los-silos-tradicionales">El Problema de los Silos Tradicionales</a></li>
+<li><a href="#la-solución-cultura-devops">La Solución: Cultura DevOps</a></li>
+<li><a href="#principios-fundamentales-de-devops">Principios Fundamentales de DevOps</a></li>
+</ul>
+</li>
+<li><a href="#12-el-flujo-de-valor-del-teclado-del-desarrollador-al-navegador-del-cliente">1.2. El flujo de valor: Del teclado del desarrollador al navegador del cliente</a><ul>
+<li><a href="#métricas-del-flujo-de-valor">Métricas del Flujo de Valor</a></li>
+<li><a href="#el-concepto-de-shift-left">El Concepto de "Shift Left"</a></li>
+</ul>
+</li>
+<li><a href="#13-el-ciclo-de-vida-del-software-moderno">1.3. El Ciclo de Vida del Software Moderno</a><ul>
+<li><a href="#131-fases-del-ciclo-de-vida">1.3.1. Fases del Ciclo de Vida</a></li>
+<li><a href="#132-integración-con-el-pipeline-cicd">1.3.2. Integración con el Pipeline CI/CD</a></li>
+</ul>
+</li>
+<li><a href="#14-beneficios-de-adoptar-devops-y-cicd">1.4. Beneficios de Adoptar DevOps y CI/CD</a><ul>
+<li><a href="#141-beneficios-técnicos">1.4.1. Beneficios Técnicos</a></li>
+<li><a href="#142-beneficios-de-negocio">1.4.2. Beneficios de Negocio</a></li>
+</ul>
+</li>
+<li><a href="#15-resumen-del-tema">1.5. Resumen del Tema</a><ul>
+<li><a href="#checklist-de-supervivencia">Checklist de Supervivencia</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="1-fundamentos-devops-y-el-ciclo-de-vida">1. Fundamentos: DevOps y el Ciclo de Vida<a class="headerlink" href="#1-fundamentos-devops-y-el-ciclo-de-vida" title="Permanent link">&para;</a></h1>
+<p>En el mundo del desarrollo de software moderno, la capacidad de entregar valor de forma rápida, segura y confiable es lo que diferencia a los equipos exitosos de los demás. <strong>DevOps</strong> y <strong>CI/CD</strong> no son solo términos de moda o herramientas que podemos instalar; representan una transformación fundamental en cómo pensamos, construimos y mantenemos el software.</p>
+<p>En esta unidad aprenderás los conceptos fundamentales que sustentan toda práctica moderna de despliegue, comprendiendo que detrás de cada pipeline automatizado hay principios filosóficos y metodológicos que hacen posible lo que hoy consideramos desarrollo profesional de software.</p>
+<h2 id="11-que-es-devops-mas-alla-de-una-herramienta-una-cultura-de-colaboracion">1.1. ¿Qué es DevOps? Más allá de una herramienta, una cultura de colaboración<a class="headerlink" href="#11-que-es-devops-mas-alla-de-una-herramienta-una-cultura-de-colaboracion" title="Permanent link">&para;</a></h2>
+<p><strong>DevOps</strong> es la abreviatura de <strong>Development</strong> (Desarrollo) y <strong>Operations</strong> (Operaciones). Sin embargo, reducir DevOps a esta traducción sería un error grave. DevOps es, ante todo, una <strong>cultura</strong>, un conjunto de <strong>prácticas</strong> y una <strong>filosofía de trabajo</strong> que busca eliminar las barreras tradicionales entre los equipos de desarrollo y operaciones.</p>
+<blockquote>
+<p><strong>💡 Nota del Profesor</strong>: DevOps no es un puesto de trabajo ni una herramienta que puedas comprar. Es una forma de trabajar y colaborar que requiere cambios tanto técnicos como organizacionales. Los equipos que adoptan DevOps con éxito cambian no solo sus herramientas, sino también sus procesos, métricas y hasta su estructura organizativa.</p>
+</blockquote>
+<h3 id="el-problema-de-los-silos-tradicionales">El Problema de los Silos Tradicionales<a class="headerlink" href="#el-problema-de-los-silos-tradicionales" title="Permanent link">&para;</a></h3>
+<p>Históricamente, los equipos de desarrollo y operaciones han trabalhado en silos completamente separados, cada uno con sus propios objetivos, métricas y herramientas:</p>
+<pre class="mermaid"><code>graph LR
+    subgraph DEVS["Equipo de Desarrollo"]
+        C1[("Código")]
+        D1[("Deploy")]
+    end
+
+    subgraph OPS["Equipo de Operaciones"]
+        M1[("Monitorización")]
+        R1[("Resolución")]
+    end
+
+    C1 --&gt;|"Push a producción"| D1
+    D1 --&gt;|"Entrega manual"| M1
+    M1 --&gt;|"Incidentes"| R1
+    R1 --&gt;|"Reportes de bugs"| C1
+
+    style DEVS fill:#1976d2
+    style OPS fill:#d32f2f</code></pre>
+<p><strong>Problemas comunes en este modelo:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Síntoma</th>
+<th>Impacto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Comunicación deficiente</strong></td>
+<td>Los devs no saben qué necesita Ops</td>
+<td>Deploys fallidos</td>
+</tr>
+<tr>
+<td><strong>Objetivos contradictorios</strong></td>
+<td>Devs quieren features; Ops quiere estabilidad</td>
+<td>Conflictos internos</td>
+</tr>
+<tr>
+<td><strong>Procesos manuales</strong></td>
+<td>Deploys a medianoche con scripts obsoletos</td>
+<td>Errores humanos</td>
+</tr>
+<tr>
+<td><strong>Fear Culture</strong></td>
+<td>Miedo a desplegar por las consecuencias</td>
+<td>Retraso en entregas</td>
+</tr>
+<tr>
+<td><strong>Culpabilización</strong></td>
+<td>"Es culpa de Devs/Ops" cuando falla</td>
+<td>Desmoralización</td>
+</tr>
+</tbody>
+</table>
+<h3 id="la-solucion-cultura-devops">La Solución: Cultura DevOps<a class="headerlink" href="#la-solucion-cultura-devops" title="Permanent link">&para;</a></h3>
+<p>DevOps surge como respuesta a estos problemas, proponiendo una cultura donde <strong>desarrollo y operaciones trabajan juntos</strong> desde el primer día hasta el último:</p>
+<pre class="mermaid"><code>graph TB
+    subgraph DEVOPS["Equipo DevOps Unificado"]
+        PL["Planificación"]
+        DEV["Desarrollo"]
+        TEST["Testing"]
+        DEPLOY["Deploy"]
+        MON["Monitorización"]
+        FEED["Feedback"]
+    end
+
+    PL --&gt; DEV
+    DEV --&gt; TEST
+    TEST --&gt; DEPLOY
+    DEPLOY --&gt; MON
+    MON --&gt; FEED
+    FEED --&gt; PL
+
+    style DEVOPS fill:#388e3c</code></pre>
+<h3 id="principios-fundamentales-de-devops">Principios Fundamentales de DevOps<a class="headerlink" href="#principios-fundamentales-de-devops" title="Permanent link">&para;</a></h3>
+<p><strong>1. Automatización de todo lo automatizable</strong></p>
+<p>Todo proceso repetible debe automatizarse: compilación, testing, despliegue, configuración de entornos y monitorización. La automatización elimina errores humanos y permite que los desarrolladores se enfoquen en lo que realmente importa: crear valor.</p>
+<p><strong>2. Infraestructura como Código (IaC)</strong></p>
+<p>Los servidores, redes y configuraciones se definen mediante código versionado. Esto permite:
+- Reproducibilidad exacta de entornos
+- Historial de cambios completo
+- Posibilidad de hacer rollback
+- Revisión mediante Pull Requests</p>
+<p><strong>3. Entrega continua</strong></p>
+<p>El software debe estar siempre en un estado desplegable. Cada commit que pasa los tests podría, teóricamente, ir a producción. Esto reduce el riesgo de cada cambio individual.</p>
+<p><strong>4. Métricas y Monitorización</strong></p>
+<p>Los equipos DevOps miden todo: tiempo de despliegue, frecuencia de fallos, tiempo de recuperación. Estas métricas guían la mejora continua.</p>
+<p><strong>5. Cultura de aprendizaje</strong></p>
+<p>Los errores no se usan para castigar, sino para aprender. Los "post-mortems" son blame-free y se enfocan en mejorar el sistema, no en encontrar culpables.</p>
+<blockquote>
+<p><strong>💡 Nota del Profesor</strong>: El principio más importante es el último. Sin una cultura de aprendizaje y seguridad psicológica, ninguna herramienta de automatización funcionará a largo plazo. Los equipos que temen represalias ocultan problemas en lugar de reportarlos.</p>
+</blockquote>
+<h2 id="12-el-flujo-de-valor-del-teclado-del-desarrollador-al-navegador-del-cliente">1.2. El flujo de valor: Del teclado del desarrollador al navegador del cliente<a class="headerlink" href="#12-el-flujo-de-valor-del-teclado-del-desarrollador-al-navegador-del-cliente" title="Permanent link">&para;</a></h2>
+<p>El <strong>flujo de valor</strong> representa el camino que sigue una característica desde que un desarrollador escribe código hasta que el usuario final la utiliza en producción. Comprender este flujo es esencial para identificar dónde podemos automatizar y mejorar.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph DESARROLLO["Fase de Desarrollo"]
+        CODE["Escribir código"]
+        LOCAL["Tests locales"]
+        COMMIT["Commit"]
+    end
+
+    subgraph INTEGRACION["Integración Continua"]
+        PUSH["Push al repo"]
+        BUILD["Build automático"]
+        CI_TEST["Tests automatizados"]
+        QUALITY["Análisis de calidad"]
+    end
+
+    subgraph ENTREGADO["Entrega"]
+        ARTIFACT["Generar artefactos"]
+        STAGING["Deploy a staging"]
+        E2E_TEST["Tests E2E"]
+    end
+
+    subgraph PRODUCCION["Producción"]
+        APPROVE["Aprobación (opcional)"]
+        PROD_DEPLOY["Deploy a producción"]
+        MONITOR["Monitorización"]
+    end
+
+    subgraph FEEDBACK["Feedback"]
+        USERS["Usuarios reales"]
+        METRICS["Métricas"]
+        IMPROVE["Mejora continua"]
+    end
+
+    CODE --&gt; LOCAL
+    LOCAL --&gt; COMMIT
+    COMMIT --&gt; PUSH
+    PUSH --&gt; BUILD
+    BUILD --&gt; CI_TEST
+    CI_TEST --&gt; QUALITY
+    QUALITY --&gt; ARTIFACT
+    ARTIFACT --&gt; STAGING
+    STAGING --&gt; E2E_TEST
+    E2E_TEST --&gt; APPROVE
+    APPROVE --&gt; PROD_DEPLOY
+    PROD_DEPLOY --&gt; MONITOR
+    MONITOR --&gt; USERS
+    USERS --&gt; METRICS
+    METRICS --&gt; IMPROVE
+    IMPROVE --&gt; CODE
+
+    style DESARROLLO fill:#1976d2
+    style INTEGRACION fill:#ef6c00
+    style ENTREGADO fill:#7b1fa2
+    style PRODUCCION fill:#c62828
+    style FEEDBACK fill:#388e3c</code></pre>
+<h3 id="metricas-del-flujo-de-valor">Métricas del Flujo de Valor<a class="headerlink" href="#metricas-del-flujo-de-valor" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Descripción</th>
+<th>Objetivo en equipos DevOps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lead Time</strong></td>
+<td>Tiempo desde que se pide una feature hasta que está en producción</td>
+<td>Horas o días, no semanas</td>
+</tr>
+<tr>
+<td><strong>Cycle Time</strong></td>
+<td>Tiempo desde que se empieza a trabajar hasta que está lista</td>
+<td>Lo más corto posible</td>
+</tr>
+<tr>
+<td><strong>Deployment Frequency</strong></td>
+<td>Veces que se despliega por día/semana</td>
+<td>Lo más frecuente posible</td>
+</tr>
+<tr>
+<td><strong>Mean Time to Recovery (MTTR)</strong></td>
+<td>Tiempo promedio para recuperarse de un fallo</td>
+<td>Minutos, no horas</td>
+</tr>
+<tr>
+<td><strong>Change Failure Rate</strong></td>
+<td>Porcentaje de deploys que causan fallos</td>
+<td>Lo más bajo posible</td>
+</tr>
+</tbody>
+</table>
+<h3 id="el-concepto-de-shift-left">El Concepto de "Shift Left"<a class="headerlink" href="#el-concepto-de-shift-left" title="Permanent link">&para;</a></h3>
+<p>Una práctica clave en DevOps es el <strong>Shift Left</strong> (desplazar a la izquierda): realizar actividades de validación lo más temprano posible en el ciclo de desarrollo:</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph TRADICIONAL["Modelo Tradicional"]
+        T1[Desarrollo]
+        T2[Testing]
+        T3[Producción]
+    end
+
+    shifted["→ Shift Left →"]
+
+    subgraph DEVOPS["Modelo DevOps"]
+        D1[Desarrollo&lt;br/&gt;+ Tests unitarios]
+        D2[Build + Tests integración]
+        D3[Staging + Tests E2E]
+        D4[Producción]
+    end
+
+    T1 --&gt; T2 --&gt; T3
+    D1 --&gt; D2 --&gt; D3 --&gt; D4
+
+    style TRADICIONAL fill:#c62828
+    style DEVOPS fill:#388e3c</code></pre>
+<blockquote>
+<p><strong>💡 Nota del Profesor</strong>: Cuanto antes detectemos un error, más barato es corregirlo. Un bug detectado en desarrollo cuesta una fracción de lo que cuesta uno descubierto en producción. Por eso los equipos DevOps invierten intensivamente en testing automatizado desde el primer día.</p>
+</blockquote>
+<h2 id="13-el-ciclo-de-vida-del-software-moderno">1.3. El Ciclo de Vida del Software Moderno<a class="headerlink" href="#13-el-ciclo-de-vida-del-software-moderno" title="Permanent link">&para;</a></h2>
+<p>El ciclo de vida del desarrollo de software ha evolucionado significativamente desde los modelos en cascada hasta las prácticas ágiles y DevOps. En el contexto de CI/CD, este ciclo se compresse y automatiza, permitiendo iteraciones rápidas y retroalimentación continua.</p>
+<h3 id="131-fases-del-ciclo-de-vida">1.3.1. Fases del Ciclo de Vida<a class="headerlink" href="#131-fases-del-ciclo-de-vida" title="Permanent link">&para;</a></h3>
+<p><strong>1. Planificación y Código (Plan &amp; Code)</strong></p>
+<p>Todo comienza con la planificación. Las funcionalidades se definen, priorizan y asignan. Los desarrolladores escriben código siguiendo los estándares del proyecto, utilizando control de versiones desde el primer momento.</p>
+<p><strong>2. Construcción e Integración (Build &amp; Integrate)</strong></p>
+<p>El código se compila y construye. Las dependencias se resuelven. En sistemas modernos, esto incluye la creación de imágenes Docker, bundles de frontend o cualquier otro artefacto desplegable.</p>
+<p><strong>3. Testing Automatizado (Test)</strong></p>
+<p>Una suite completa de tests se ejecuta automáticamente:
+- <strong>Tests unitarios</strong>: Verifican funciones individuales
+- <strong>Tests de integración</strong>: Verifican que los componentes funcionan juntos
+- <strong>Tests de aceptación</strong>: Verifican que la funcionalidad cumple los requisitos
+- <strong>Tests de rendimiento</strong>: Verifican que el sistema cumple los requisitos de performance</p>
+<p><strong>4. Despliegue (Deploy)</strong></p>
+<p>El código validado se despliega automáticamente a entornos intermedios y, tras aprobación, a producción. La automatización garantiza que cada despliegue sea reproducible y auditable.</p>
+<p><strong>5. Operaciones y Monitorización (Operate &amp; Monitor)</strong></p>
+<p>El sistema en producción se monitoriza constantemente. Métricas de rendimiento, errores y uso proporcionan retroalimentación valiosa para futuras iteraciones.</p>
+<h3 id="132-integracion-con-el-pipeline-cicd">1.3.2. Integración con el Pipeline CI/CD<a class="headerlink" href="#132-integracion-con-el-pipeline-cicd" title="Permanent link">&para;</a></h3>
+<p>El pipeline CI/CD es la implementación técnica del ciclo de vida:</p>
+<pre class="mermaid"><code>flowchart TD
+    START((Inicio&lt;br/&gt;Push a main)) --&gt; BUILD[Build]
+    BUILD --&gt; TEST_UNIT[Tests Unitarios]
+    TEST_UNIT --&gt; TEST_INT[Tests Integración]
+    TEST_INT --&gt; QUALITY[Linting]
+    QUALITY --&gt; COVERAGE[Cobertura]
+    COVERAGE --&gt; ARTIFACT{¿Tests pasan?}
+
+    ARTIFACT --&gt;|No| FAIL[Fallar Pipeline]
+    FAIL --&gt; END((Fin))
+
+    ARTIFACT --&gt;|Sí| STAGING[Deploy Staging]
+    STAGING --&gt; E2E[Tests E2E]
+    E2E --&gt; PROD_CHECK{¿Listo para&lt;br/&gt;producción?}
+
+    PROD_CHECK --&gt;|No| FAIL
+    PROD_CHECK --&gt;|Sí| DEPLOY_PROD[Deploy Producción]
+    DEPLOY_PROD --&gt; NOTIFY[Notificar]
+    NOTIFY --&gt; MONITOR[Monitorización]
+    MONITOR --&gt; END
+
+    style BUILD fill:#1976d2
+    style TEST_UNIT fill:#388e3c
+    style TEST_INT fill:#ef6c00
+    style COVERAGE fill:#f9a825
+    style DEPLOY_PROD fill:#c62828
+    style MONITOR fill:#7b1fa2</code></pre>
+<h2 id="14-beneficios-de-adoptar-devops-y-cicd">1.4. Beneficios de Adoptar DevOps y CI/CD<a class="headerlink" href="#14-beneficios-de-adoptar-devops-y-cicd" title="Permanent link">&para;</a></h2>
+<h3 id="141-beneficios-tecnicos">1.4.1. Beneficios Técnicos<a class="headerlink" href="#141-beneficios-tecnicos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Beneficio</th>
+<th>Descripción</th>
+<th>Impacto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Detección temprana de errores</strong></td>
+<td>Los problemas se identifican en minutos, no días</td>
+<td>Reducción de bugs en producción</td>
+</tr>
+<tr>
+<td><strong>Entornos consistentes</strong></td>
+<td>Dev, staging y producción son idénticos</td>
+<td>Elimina "funciona en mi máquina"</td>
+</tr>
+<tr>
+<td><strong>Rollbacks fáciles</strong></td>
+<td>Volver a una versión anterior es trivial</td>
+<td>Reduce el riesgo de cada cambio</td>
+</tr>
+<tr>
+<td><strong>Mayor productividad</strong></td>
+<td>Los desarrolladores se enfoccan en código</td>
+<td>Menos tiempo en tareas manuales</td>
+</tr>
+<tr>
+<td><strong>Documentación viva</strong></td>
+<td>El pipeline es la documentación del proceso</td>
+<td>Onboarding más rápido</td>
+</tr>
+</tbody>
+</table>
+<h3 id="142-beneficios-de-negocio">1.4.2. Beneficios de Negocio<a class="headerlink" href="#142-beneficios-de-negocio" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Beneficio</th>
+<th>Descripción</th>
+<th>Impacto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Time to Market</strong></td>
+<td>Nuevas funcionalidades llegan más rápido</td>
+<td>Ventaja competitiva</td>
+</tr>
+<tr>
+<td><strong>Mayor calidad</strong></td>
+<td>Menos bugs en producción</td>
+<td>Satisfacción del cliente</td>
+</tr>
+<tr>
+<td><strong>Mayor frecuencia de entrega</strong></td>
+<td>Releases pequeños y frecuentes</td>
+<td>Respuesta rápida al mercado</td>
+</tr>
+<tr>
+<td><strong>Reducción de costes</strong></td>
+<td>Menos tiempo corrigiendo errores</td>
+<td>Mejor ROI</td>
+</tr>
+<tr>
+<td><strong>Satisfacción del equipo</strong></td>
+<td>Menos trabajo manual y estresante</td>
+<td>Retención de talento</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-resumen-del-tema">1.5. Resumen del Tema<a class="headerlink" href="#15-resumen-del-tema" title="Permanent link">&para;</a></h2>
+<p>En este primer tema hemos establecido los fundamentos conceptuales que sustentan todo el resto de la unidad:</p>
+<pre class="mermaid"><code>graph TD
+    T1[DevOps] --&gt; T2[Flujo de Valor]
+    T2 --&gt; T3[Ciclo de Vida]
+    T3 --&gt; T4[Beneficios]
+
+    subgraph FUNDAMENTOS["Fundamentos"]
+        T1
+        T2
+        T3
+    end
+
+    T1 --&gt; T1A["Cultura colaborativa"]
+    T1 --&gt; T1B["Eliminación de silos"]
+    T1 --&gt; T1C["Automatización"]
+
+    T2 --&gt; T2A["Plan → Code → Build → Test"]
+    T2 --&gt; T2B["Deploy → Monitor → Feedback"]
+    T2 --&gt; T2C["Métricas DORA"]
+
+    T3 --&gt; T3A["Shift Left"]
+    T3 --&gt; T3B["Pipeline CI/CD"]
+    T3 --&gt; T3C["Entornos aislados"]
+
+    T4 --&gt; T4A["Técnicos: calidad, velocidad"]
+    T4 --&gt; T4B["Negocio: ROI, ventaja competitiva"]</code></pre>
+<hr />
+<blockquote>
+<p><strong>💡 Nota del Profesor</strong>: Antes de profundizar en las herramientas técnicas, es crucial que entiendas estos conceptos. Un pipeline de GitHub Actions sin una cultura DevOps detrás es solo un script sofisticado. El verdadero poder viene cuando combinas las herramientas correctas con las prácticas correctas.</p>
+</blockquote>
+<hr />
+<h3 id="checklist-de-supervivencia">Checklist de Supervivencia<a class="headerlink" href="#checklist-de-supervivencia" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Puedo explicar qué es DevOps y en qué se diferencia de los silos tradicionales</li>
+<li>[ ] Entiendo el concepto de "flujo de valor" y las métricas DORA</li>
+<li>[ ] Sé qué significa "Shift Left" y por qué es importante</li>
+<li>[ ] Conozco las fases del ciclo de vida del software moderno</li>
+<li>[ ] Puedo explicar los beneficios técnicos y de negocio de adoptar CI/CD</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../../actividades/UT5-actividades.html" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Actividades">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Actividades
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="02-Integracion-Continua-CI.html" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Integración continua (CI)">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Integración continua (CI)
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "content.code.copy", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+    
+  </body>
+</html>

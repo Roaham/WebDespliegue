@@ -1,0 +1,4480 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Temario, apuntes y actividades del módulo — Curso 2025/2026">
+      
+      
+      
+      
+        <link rel="prev" href="02-Integracion-Continua-CI.html">
+      
+      
+        <link rel="next" href="04-GitHub-Actions-CLI.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Entrega y despliegue continuo (CD) - Despliegue de Aplicaciones Web · 2.º DAW</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-profundizando-en-cd-entrega-y-despliegue-continuo" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../index.html" title="Despliegue de Aplicaciones Web · 2.º DAW" class="md-header__button md-logo" aria-label="Despliegue de Aplicaciones Web · 2.º DAW" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Despliegue de Aplicaciones Web · 2.º DAW
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Entrega y despliegue continuo (CD)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="deep-orange"  aria-label="Cambiar a modo noche"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo noche" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="Cambiar a modo día"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo día" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../evaluacion.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  El curso
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01-control-versiones-documentacion/01-introduccion.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Temario
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../print_page.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Todo el material (imprimir / exportar a PDF)
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Despliegue de Aplicaciones Web · 2.º DAW" class="md-nav__button md-logo" aria-label="Despliegue de Aplicaciones Web · 2.º DAW" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Despliegue de Aplicaciones Web · 2.º DAW
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    El curso
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    El curso
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluacion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tecnologias.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tecnologías
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT0 · Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT0 · Control de versiones y documentación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-control-versiones-documentacion/01-introduccion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-control-versiones-documentacion/02-git-basico.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git básico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-control-versiones-documentacion/03-github.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-control-versiones-documentacion/04-herramientas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herramientas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-control-versiones-documentacion/05-documentacion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-control-versiones-documentacion/06-resumen.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT0-Git-y-Documentacion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT0-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT1 · Arquitecturas web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT1 · Arquitecturas web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/01-introduccion-web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/02-componentes-web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Componentes web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/03-arquitecturas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/04-http-https.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP y HTTPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/05-servicios-apis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios y APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/06-web-dinamica.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web dinámica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/07-lenguajes-frameworks.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lenguajes y frameworks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/08-servidores.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servidores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/09-despliegue.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-arquitectura-web/10-resumen.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT1-Arquitecturas-Web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT1-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT2 · Servidores web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT2 · Servidores web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_1" id="__nav_3_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/01-contenedores-docker.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenedores y Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/02-github-pages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Pages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/03-netlify.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Netlify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/04-apache-web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/05-nginx-web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nginx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/06-nginx-proxy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nginx: proxy y balanceo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT2-Servidores-Web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT2-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT3 · Servidores de aplicaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT3 · Servidores de aplicaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_1" id="__nav_3_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/07-java.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Despliegue Java (JVM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/08-net.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Despliegue .NET
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-servidores-web-y-aplicaciones/09-resumen.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT3-Servidores-Aplicaciones.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT3-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT4 · Transferencia de archivos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT4 · Transferencia de archivos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_1" id="__nav_3_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-transferencia-archivos/01-ftp.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-transferencia-archivos/02-vsftpd.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VSFTPD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-transferencia-archivos/03-ftps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FTPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-transferencia-archivos/04-sftp.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SFTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-transferencia-archivos/05-spring-ftp.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FTP con Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-transferencia-archivos/06-resumen.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT4-Transferencia-Archivos.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT4-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT5 · Verificación y servicios de red
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT5 · Verificación y servicios de red
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_1" id="__nav_3_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/01-Introduccion-QA.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción al QA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/02-Pruebas-Unitarias.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pruebas unitarias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/03-Pruebas-Integracion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pruebas de integración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/04-Automatizacion-APIs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatización de APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/05-Pruebas-E2E.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pruebas E2E
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/06-Servicios-Red-Infraestructura.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios de red e infraestructura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-verificacion-servicios-red/07-resumen.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT5-Verificacion-y-Servicios-Red.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT5-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UT6 · Integración y despliegue continuo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UT6 · Integración y despliegue continuo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_7_1" id="__nav_3_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_7_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-Fundamentos-DevOps-CI-CD.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos DevOps y CI/CD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-Integracion-Continua-CI.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración continua (CI)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrega y despliegue continuo (CD)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="03-Entrega-Despliegue-Continuo-CD.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entrega y despliegue continuo (CD)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31-continuous-delivery-vs-continuous-deployment-el-matiz-del-boton-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Continuous Delivery vs. Continuous Deployment: El matiz del "botón manual"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Continuous Delivery vs. Continuous Deployment: El matiz del &#34;botón manual&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-continuous-delivery-cd-listo-para-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1. Continuous Delivery (CD): Listo para producción
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-continuous-deployment-despliegue-automatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2. Continuous Deployment: Despliegue automático
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-continuous-integration-la-base-de-todo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.3. Continuous Integration: La base de todo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-diferencias-y-similitudes-tabla-comparativa-de-objetivos-y-procesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Diferencias y Similitudes: Tabla comparativa de objetivos y procesos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-entornos-desarrollo-staging-pre-produccion-y-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Entornos: Desarrollo, Staging (Pre-producción) y Producción
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Entornos: Desarrollo, Staging (Pre-producción) y Producción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-entorno-de-desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.1. Entorno de Desarrollo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-entorno-de-staging-pre-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.2. Entorno de Staging (Pre-producción)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-entorno-de-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.3. Entorno de Producción
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-configuracion-de-environments-en-github-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.4. 🛠️ Configuración de Environments en GitHub Actions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-aprobaciones-y-gates-el-control-humano-en-cd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. Aprobaciones y Gates: El control humano en CD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4. Aprobaciones y Gates: El control humano en CD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341-environment-protection-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.1. Environment Protection Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342-required-reviewers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.2. Required Reviewers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#343-wait-timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.3. Wait Timer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-estrategias-de-despliegue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. Estrategias de Despliegue
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5. Estrategias de Despliegue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#351-despliegue-recreativo-recreate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5.1. Despliegue Recreativo (Recreate)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#352-despliegue-rolling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5.2. Despliegue Rolling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#353-blue-green-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5.3. Blue-Green Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#354-canary-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5.4. Canary Release
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checklist-de-supervivencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist de Supervivencia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04-GitHub-Actions-CLI.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Actions y CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05-Control-Calidad-Branch-Protection.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de calidad y branch protection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06-Pipeline-Fullstack-Practica.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline fullstack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07-Despliegue-Automatizado.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Despliegue automatizado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="08-Resumen.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contenidos/UT6-CICD.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actividades/UT6-actividades.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../print_page.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Todo el material (imprimir / exportar a PDF)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31-continuous-delivery-vs-continuous-deployment-el-matiz-del-boton-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Continuous Delivery vs. Continuous Deployment: El matiz del "botón manual"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Continuous Delivery vs. Continuous Deployment: El matiz del &#34;botón manual&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-continuous-delivery-cd-listo-para-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1. Continuous Delivery (CD): Listo para producción
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-continuous-deployment-despliegue-automatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2. Continuous Deployment: Despliegue automático
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-continuous-integration-la-base-de-todo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.3. Continuous Integration: La base de todo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-diferencias-y-similitudes-tabla-comparativa-de-objetivos-y-procesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Diferencias y Similitudes: Tabla comparativa de objetivos y procesos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-entornos-desarrollo-staging-pre-produccion-y-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Entornos: Desarrollo, Staging (Pre-producción) y Producción
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Entornos: Desarrollo, Staging (Pre-producción) y Producción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-entorno-de-desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.1. Entorno de Desarrollo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-entorno-de-staging-pre-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.2. Entorno de Staging (Pre-producción)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-entorno-de-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.3. Entorno de Producción
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-configuracion-de-environments-en-github-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.4. 🛠️ Configuración de Environments en GitHub Actions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-aprobaciones-y-gates-el-control-humano-en-cd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. Aprobaciones y Gates: El control humano en CD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4. Aprobaciones y Gates: El control humano en CD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341-environment-protection-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.1. Environment Protection Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342-required-reviewers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.2. Required Reviewers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#343-wait-timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.3. Wait Timer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-estrategias-de-despliegue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. Estrategias de Despliegue
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5. Estrategias de Despliegue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#351-despliegue-recreativo-recreate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5.1. Despliegue Recreativo (Recreate)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#352-despliegue-rolling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5.2. Despliegue Rolling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#353-blue-green-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5.3. Blue-Green Deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#354-canary-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5.4. Canary Release
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checklist-de-supervivencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist de Supervivencia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<ul>
+<li><a href="#3-profundizando-en-cd-entrega-y-despliegue-continuo">3. Profundizando en CD (Entrega y Despliegue Continuo)</a></li>
+<li><a href="#31-continuous-delivery-vs-continuous-deployment-el-matiz-del-botón-manual">3.1. Continuous Delivery vs. Continuous Deployment: El matiz del "botón manual"</a><ul>
+<li><a href="#311-continuous-delivery-cd-listo-para-producción">3.1.1. Continuous Delivery (CD): Listo para producción</a></li>
+<li><a href="#312-continuous-deployment-despliegue-automático">3.1.2. Continuous Deployment: Despliegue automático</a></li>
+<li><a href="#313-continuous-integration-la-base-de-todo">3.1.3. Continuous Integration: La base de todo</a></li>
+</ul>
+</li>
+<li><a href="#32-diferencias-y-similitudes-tabla-comparativa-de-objetivos-y-procesos">3.2. Diferencias y Similitudes: Tabla comparativa de objetivos y procesos</a></li>
+<li><a href="#33-entornos-desarrollo-staging-pre-producción-y-producción">3.3. Entornos: Desarrollo, Staging (Pre-producción) y Producción</a><ul>
+<li><a href="#331-entorno-de-desarrollo">3.3.1. Entorno de Desarrollo</a></li>
+<li><a href="#332-entorno-de-staging-pre-producción">3.3.2. Entorno de Staging (Pre-producción)</a></li>
+<li><a href="#333-entorno-de-producción">3.3.3. Entorno de Producción</a></li>
+<li><a href="#334-️-configuración-de-environments-en-github-actions">3.3.4. 🛠️ Configuración de Environments en GitHub Actions</a></li>
+</ul>
+</li>
+<li><a href="#34-aprobaciones-y-gates-el-control-humano-en-cd">3.4. Aprobaciones y Gates: El control humano en CD</a><ul>
+<li><a href="#341-environment-protection-rules">3.4.1. Environment Protection Rules</a></li>
+<li><a href="#342-required-reviewers">3.4.2. Required Reviewers</a></li>
+<li><a href="#343-wait-timer">3.4.3. Wait Timer</a></li>
+</ul>
+</li>
+<li><a href="#35-estrategias-de-despliegue">3.5. Estrategias de Despliegue</a><ul>
+<li><a href="#351-despliegue-recreativo-recreate">3.5.1. Despliegue Recreativo (Recreate)</a></li>
+<li><a href="#352-despliegue-rolling">3.5.2. Despliegue Rolling</a></li>
+<li><a href="#353-blue-green-deployment">3.5.3. Blue-Green Deployment</a></li>
+<li><a href="#354-canary-release">3.5.4. Canary Release</a></li>
+<li><a href="#checklist-de-supervivencia">Checklist de Supervivencia</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="3-profundizando-en-cd-entrega-y-despliegue-continuo">3. Profundizando en CD (Entrega y Despliegue Continuo)<a class="headerlink" href="#3-profundizando-en-cd-entrega-y-despliegue-continuo" title="Permanent link">&para;</a></h1>
+<p>La <strong>Entrega Continua</strong> (CD) y el <strong>Despliegue Continuo</strong> extienden los principios de CI un paso más allá. Si CI asegura que el código está integrado correctamente, CD asegura que ese código integrado <strong>puede llegar a producción de forma segura y automatizada</strong>.</p>
+<p>La distinción entre "Entrega" y "Despliegue" es sutil pero crucial: una requiere intervención humana, la otra no.</p>
+<h2 id="31-continuous-delivery-vs-continuous-deployment-el-matiz-del-boton-manual">3.1. Continuous Delivery vs. Continuous Deployment: El matiz del "botón manual"<a class="headerlink" href="#31-continuous-delivery-vs-continuous-deployment-el-matiz-del-boton-manual" title="Permanent link">&para;</a></h2>
+<h3 id="311-continuous-delivery-cd-listo-para-produccion">3.1.1. Continuous Delivery (CD): Listo para producción<a class="headerlink" href="#311-continuous-delivery-cd-listo-para-produccion" title="Permanent link">&para;</a></h3>
+<p><strong>Continuous Delivery</strong> significa que cada cambio que pasa el pipeline CI está <strong>listo para ir a producción</strong> en cualquier momento, pero requiere una <strong>aprobación humana</strong> para el despliegue final.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph CI["Integración Continua"]
+        PUSH[("Push a main")] --&gt; BUILD[Build]
+        BUILD --&gt; TEST[Tests]
+        TEST --&gt; QUALITY[Análisis calidad]
+        QUALITY --&gt; ARTIFACT[Artefacto listo]
+    end
+
+    subgraph CD["Entrega Continua"]
+        ARTIFACT --&gt; STAGING[Deploy Staging]
+        STAGING --&gt; E2E[Tests E2E]
+        E2E --&gt;|"Listo"| MANUAL{¿Deploy a&lt;br/&gt;producción?}
+        MANUAL --&gt;|No| WAIT[(Esperando&lt;br/&gt;aprobación)]
+        MANUAL --&gt;|Sí| PROD[Deploy Producción]
+    end
+
+    style CI fill:#1976d2
+    style CD fill:#ef6c00
+    style MANUAL fill:#f9a825</code></pre>
+<p><strong>Características clave:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Automatización</strong></td>
+<td>Build, test y deploy a staging son automáticos</td>
+</tr>
+<tr>
+<td><strong>Control humano</strong></td>
+<td>El deploy a producción requiere aprobación</td>
+</tr>
+<tr>
+<td><strong>State "ready"</strong></td>
+<td>El software siempre está en estado desplegable</td>
+</tr>
+<tr>
+<td><strong>Release decision</strong></td>
+<td>El negocio decide cuándo hacer el release</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cuándo usar Continuous Delivery:</strong></p>
+<ul>
+<li>✅ Cuando necesitas coordinar con marketing para features</li>
+<li>✅ En industrias reguladas que requieren aprobación manual</li>
+<li>✅ Cuando los ciclos de release no son diarios</li>
+<li>✅ Cuando tienes múltiples entornos (QA, UAT, Producción)</li>
+</ul>
+<h3 id="312-continuous-deployment-despliegue-automatico">3.1.2. Continuous Deployment: Despliegue automático<a class="headerlink" href="#312-continuous-deployment-despliegue-automatico" title="Permanent link">&para;</a></h3>
+<p><strong>Continuous Deployment</strong> lleva CD un paso más allá: <strong>cada cambio que pasa todos los tests se despliega automáticamente a producción</strong> sin intervención humana.</p>
+<pre class="mermaid"><code>flowchart TD
+    PUSH[("Push a main")] --&gt; BUILD[Build]
+    BUILD --&gt; TEST[Tests]
+    TEST --&gt; QUALITY[Análisis]
+    QUALITY --&gt; E2E[Tests E2E]
+    E2E --&gt;|"Tests pasan"| PROD[Deploy&lt;br/&gt;Producción]
+    PROD --&gt; MONITOR[Monitorizar]
+    MONITOR --&gt;|"Fallo detected"| ROLLBACK[Rollback]
+
+    style BUILD fill:#388e3c
+    style TEST fill:#388e3c
+    style E2E fill:#388e3c
+    style PROD fill:#1976d2</code></pre>
+<p><strong>Requisitos para Continuous Deployment:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Requisito</th>
+<th>Descripción</th>
+<th>Por qué importa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tests exhaustivos</strong></td>
+<td>Cobertura &gt; 80%, tests E2E robustos</td>
+<td>No hay humano verificando</td>
+</tr>
+<tr>
+<td><strong>Monitoreo avanzado</strong></td>
+<td>Alertas automáticas, métricas en tiempo real</td>
+<td>Detectar problemas rápido</td>
+</tr>
+<tr>
+<td><strong>Rollback automático</strong></td>
+<td>Capacidad de revertir en segundos</td>
+<td>Minimizar impacto de fallos</td>
+</tr>
+<tr>
+<td><strong>Feature flags</strong></td>
+<td>Activar/desactivar features sin deploy</td>
+<td>Detención de emergencia funcionalidad</td>
+</tr>
+<tr>
+<td><strong>Cultura de calidad</strong></td>
+<td>Todo el equipo comprometido</td>
+<td>Cada commit es un release</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cuándo usar Continuous Deployment:</strong></p>
+<ul>
+<li>✅ Servicios internos donde el impacto es controlado</li>
+<li>✅ Empresas "born in the cloud"</li>
+<li>✅ Cuando puedes tolerar bugs menores (y revertirlos rápido)</li>
+<li>✅ Equipos con alta madurez en testing y monitoreo</li>
+</ul>
+<h3 id="313-continuous-integration-la-base-de-todo">3.1.3. Continuous Integration: La base de todo<a class="headerlink" href="#313-continuous-integration-la-base-de-todo" title="Permanent link">&para;</a></h3>
+<p>No importa si eliges Delivery o Deployment, <strong>ambos requieren CI</strong> como base:</p>
+<pre class="mermaid"><code>flowchart TB
+    subgraph BASE["Lo que TODOS comparten"]
+        CI[("Integración Continua&lt;br/&gt;Build + Tests automatizados")]
+    end
+
+    subgraph OPCIONES["¿Qué CD elijo?"]
+        CDELIVERY["Continuous Delivery&lt;br/&gt;+ Aprobación manual"]
+        CDEPLOY["Continuous Deployment&lt;br/&gt;Todo automático"]
+    end
+
+    CI --&gt; CDELIVERY
+    CI --&gt; CDEPLOY
+
+    CI -.-&gt;|"La base"| ANY["Cualquier estrategia&lt;br/&gt;CD es imposible sin CI"]</code></pre>
+<h2 id="32-diferencias-y-similitudes-tabla-comparativa-de-objetivos-y-procesos">3.2. Diferencias y Similitudes: Tabla comparativa de objetivos y procesos<a class="headerlink" href="#32-diferencias-y-similitudes-tabla-comparativa-de-objetivos-y-procesos" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Continuous Integration</th>
+<th>Continuous Delivery</th>
+<th>Continuous Deployment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Frecuencia de commits</strong></td>
+<td>Múltiples al día</td>
+<td>Múltiples al día</td>
+<td>Múltiples al día</td>
+</tr>
+<tr>
+<td><strong>Build automatizado</strong></td>
+<td>✅ Sí</td>
+<td>✅ Sí</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><strong>Tests automatizados</strong></td>
+<td>✅ Sí</td>
+<td>✅ Sí</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><strong>Deploy a staging</strong></td>
+<td>✅ Sí</td>
+<td>✅ Sí</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><strong>Deploy a producción</strong></td>
+<td>❌ No</td>
+<td>⚠️ Con aprobación</td>
+<td>✅ Automático</td>
+</tr>
+<tr>
+<td><strong>Requiere tests E2E</strong></td>
+<td>⚠️ Opcional</td>
+<td>✅ Recomendado</td>
+<td>✅ Obligatorio</td>
+</tr>
+<tr>
+<td><strong>Requiere monitoreo</strong></td>
+<td>⚠️ Básico</td>
+<td>✅ Completo</td>
+<td>✅ Completo + alertas</td>
+</tr>
+<tr>
+<td><strong>Cultura necesaria</strong></td>
+<td>Media</td>
+<td>Alta</td>
+<td>Muy alta</td>
+</tr>
+<tr>
+<td><strong>Riesgo por cambio</strong></td>
+<td>Bajo</td>
+<td>Medio</td>
+<td>Alto mitigado</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>💡 Nota del Profesor</strong>: La mayoría de los equipos начина con CI + CD (Delivery), no Deployment. Continuous Deployment requiere una madurez que toma meses o años desarrollar. No hay vergüenza en tener aprobación manual; lo importante es que el software siempre esté listo para desplegarse.</p>
+</blockquote>
+<h2 id="33-entornos-desarrollo-staging-pre-produccion-y-produccion">3.3. Entornos: Desarrollo, Staging (Pre-producción) y Producción<a class="headerlink" href="#33-entornos-desarrollo-staging-pre-produccion-y-produccion" title="Permanent link">&para;</a></h2>
+<h3 id="331-entorno-de-desarrollo">3.3.1. Entorno de Desarrollo<a class="headerlink" href="#331-entorno-de-desarrollo" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Propósito</strong></td>
+<td>Desarrollo local y pruebas rápidas</td>
+</tr>
+<tr>
+<td><strong>Acceso</strong></td>
+<td>Todos los desarrolladores</td>
+</tr>
+<tr>
+<td><strong>Datos</strong></td>
+<td>Datos de prueba, a veces sintéticos</td>
+</tr>
+<tr>
+<td><strong>Configuración</strong></td>
+<td>Flexible, puede cambiarse</td>
+</tr>
+<tr>
+<td><strong>Estabilidad</strong></td>
+<td>Variable, se espera que Rompa</td>
+</tr>
+</tbody>
+</table>
+<h3 id="332-entorno-de-staging-pre-produccion">3.3.2. Entorno de Staging (Pre-producción)<a class="headerlink" href="#332-entorno-de-staging-pre-produccion" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart TB
+    subgraph PROD["Producción"]
+        P1[("Usuarios reales&lt;br/&gt;Datos reales")]
+    end
+
+    subgraph STAGING["Staging"]
+        S1[("Réplica exacta&lt;br/&gt;de producción")]
+    end
+
+    subgraph DEV["Desarrollo"]
+        D1[("Entorno local&lt;br/&gt;o compartido")]
+    end
+
+    D1 --&gt;|"Promover"| S1
+    S1 --&gt;|"Promover"| P1
+
+    style STAGING fill:#f9a825
+    style PROD fill:#f9a825</code></pre>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Propósito</strong></td>
+<td>Validación antes de producción</td>
+</tr>
+<tr>
+<td><strong>Acceso</strong></td>
+<td>Desarrolladores + QA + Product</td>
+</tr>
+<tr>
+<td><strong>Datos</strong></td>
+<td>Anonymizados de producción</td>
+</tr>
+<tr>
+<td><strong>Configuración</strong></td>
+<td>Idéntica a producción</td>
+</tr>
+<tr>
+<td><strong>Estabilidad</strong></td>
+<td>Alta, refleja producción</td>
+</tr>
+</tbody>
+</table>
+<h3 id="333-entorno-de-produccion">3.3.3. Entorno de Producción<a class="headerlink" href="#333-entorno-de-produccion" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Propósito</strong></td>
+<td>Uso por usuarios reales</td>
+</tr>
+<tr>
+<td><strong>Acceso</strong></td>
+<td>Restringido, solo ops</td>
+</tr>
+<tr>
+<td><strong>Datos</strong></td>
+<td>Reales y sensibles</td>
+</tr>
+<tr>
+<td><strong>Configuración</strong></td>
+<td>Estricta, auditada</td>
+</tr>
+<tr>
+<td><strong>Estabilidad</strong></td>
+<td>Crítica, 99.9% uptime</td>
+</tr>
+</tbody>
+</table>
+<h3 id="334-configuracion-de-environments-en-github-actions">3.3.4. 🛠️ Configuración de Environments en GitHub Actions<a class="headerlink" href="#334-configuracion-de-environments-en-github-actions" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy to Staging and Production</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">on</span><span class="p">:</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">main</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nt">jobs</span><span class="p">:</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span><span class="nt">deploy-staging</span><span class="p">:</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">staging</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy to Staging</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo "Deploying to staging..."</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">  </span><span class="nt">deploy-production</span><span class="p">:</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy-staging</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy to Production</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo "Deploying to production..."</span>
+</code></pre></div>
+<h2 id="34-aprobaciones-y-gates-el-control-humano-en-cd">3.4. Aprobaciones y Gates: El control humano en CD<a class="headerlink" href="#34-aprobaciones-y-gates-el-control-humano-en-cd" title="Permanent link">&para;</a></h2>
+<h3 id="341-environment-protection-rules">3.4.1. Environment Protection Rules<a class="headerlink" href="#341-environment-protection-rules" title="Permanent link">&para;</a></h3>
+<p>GitHub permite configurar protecciones en environments:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">environment</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://app.example.com</span>
+</code></pre></div>
+<h3 id="342-required-reviewers">3.4.2. Required Reviewers<a class="headerlink" href="#342-required-reviewers" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">environment</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://app.example.com</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">required_reviewers</span><span class="p">:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tech-lead-1</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tech-lead-2</span>
+</code></pre></div>
+<h3 id="343-wait-timer">3.4.3. Wait Timer<a class="headerlink" href="#343-wait-timer" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">environment</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://app.example.com</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">required_reviewers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">wait_timer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">900</span><span class="w">  </span><span class="c1"># 15 minutos antes de poder approve</span>
+</code></pre></div>
+<h2 id="35-estrategias-de-despliegue">3.5. Estrategias de Despliegue<a class="headerlink" href="#35-estrategias-de-despliegue" title="Permanent link">&para;</a></h2>
+<h3 id="351-despliegue-recreativo-recreate">3.5.1. Despliegue Recreativo (Recreate)<a class="headerlink" href="#351-despliegue-recreativo-recreate" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart TB
+    subgraph V1["Versión 1"]
+        S1A[Server A]
+        S1B[Server B]
+    end
+
+    DESTROY[("Eliminar V1")] --&gt;|"Deploy V2"| S2A[Server A V2]
+    DESTROY --&gt;|"Deploy V2"| S2B[Server B V2]
+
+    style DESTROY fill:#c62828</code></pre>
+<p><strong>Pros:</strong>
+- ✅ Simple de implementar
+- ✅ Sin coste adicional de infraestructura</p>
+<p><strong>Contras:</strong>
+- ❌ Downtime durante el deploy
+- ❌ Riesgo alto si algo falla</p>
+<h3 id="352-despliegue-rolling">3.5.2. Despliegue Rolling<a class="headerlink" href="#352-despliegue-rolling" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart LR
+    subgraph ROLLING["Rolling Deploy"]
+        direction LR
+        G1[(Grupo 1&lt;br/&gt;Actualizando)]
+        G2[(Grupo 2&lt;br/&gt;Vieja)]
+        G3[(Grupo 3&lt;br/&gt;Vieja)]
+    end
+
+    style G1 fill:#f9a825</code></pre>
+<p><strong>Pros:</strong>
+- ✅ Sin downtime
+- ✅ Deploy gradual
+- ✅ Rollback rápido</p>
+<p><strong>Contras:</strong>
+- ❌ Más complejo de implementar
+- ❌ Incompatible con algunos cambios de BD</p>
+<h3 id="353-blue-green-deployment">3.5.3. Blue-Green Deployment<a class="headerlink" href="#353-blue-green-deployment" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart TB
+    subgraph BLUE["Blue Environment"]
+        B1[(" Producción&lt;br/&gt;V1")]
+    end
+
+    subgraph GREEN["Green Environment"]
+        G1[(" Preparada&lt;br/&gt;V2")]
+    end
+
+    LB[("Load Balancer")] --&gt;|"Switch"| GREEN
+
+    style BLUE fill:#1976d2
+    style GREEN fill:#388e3c</code></pre>
+<p><strong>Pros:</strong>
+- ✅ Rollback instantáneo
+- ✅ Testing completo antes del switch
+- ✅ Sin downtime</p>
+<p><strong>Contras:</strong>
+- ❌ Duplica coste de infraestructura
+- ❌ Requiere capacidad extra</p>
+<h3 id="354-canary-release">3.5.4. Canary Release<a class="headerlink" href="#354-canary-release" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart TB
+    subgraph CANARY["Canary Release"]
+        direction LR
+        C1[("10% Tráfego&lt;br/&gt;V2")]
+        C2[("90% Tráfego&lt;br/&gt;V1")]
+    end
+
+    MONITOR[("Monitorizar&lt;br/&gt;métricas")] -.-&gt; C1
+
+    style C1 fill:#f9a825
+    style C2 fill:#1976d2</code></pre>
+<p><strong>Pros:</strong>
+- ✅ Detección temprana de problemas
+- ✅ Exposure gradual
+- ✅ Rollback automático si métricas caen</p>
+<p><strong>Contras:</strong>
+- ❌ Requiere infraestructura compleja
+- ❌ Routing por porcentaje necesario</p>
+<hr />
+<blockquote>
+<p><strong>💡 Nota del Profesor</strong>: La estrategia de despliegue debe adaptarse al riesgo de tu aplicación y la tolerancia de tu negocio. Empieza con Recreate o Rolling, y evoluciona hacia Blue-Green o Canary cuando tu aplicación y equipo estén listos.</p>
+</blockquote>
+<hr />
+<h3 id="checklist-de-supervivencia">Checklist de Supervivencia<a class="headerlink" href="#checklist-de-supervivencia" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Puedo explicar la diferencia entre Continuous Integration, Delivery y Deployment</li>
+<li>[ ] Sé cuándo usar cada tipo de CD según el contexto</li>
+<li>[ ] Conozco los tres entornos típicos y su propósito</li>
+<li>[ ] Puedo configurar Environment Protection en GitHub Actions</li>
+<li>[ ] Conozco las estrategias de despliegue y sus pros/contras</li>
+<li>[ ] Entiendo cuándo usar aprobación manual vs. despliegue automático</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="02-Integracion-Continua-CI.html" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Integración continua (CI)">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Integración continua (CI)
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="04-GitHub-Actions-CLI.html" class="md-footer__link md-footer__link--next" aria-label="Siguiente: GitHub Actions y CLI">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                GitHub Actions y CLI
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "content.code.copy", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+    
+  </body>
+</html>
